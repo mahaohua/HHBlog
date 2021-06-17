@@ -39,6 +39,9 @@ public class JwtUtils {
                 .compact();
     }
 
+    /**
+     * 获取jwt的信息
+     */
     public Claims getClaimByToken(String token){
         try {
             return Jwts.parser()

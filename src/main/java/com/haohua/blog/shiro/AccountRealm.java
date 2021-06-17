@@ -9,10 +9,12 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * shiro进行登录或者权限校验
  */
+@Component
 public class AccountRealm extends AuthorizingRealm {
 
     @Autowired
@@ -23,8 +25,6 @@ public class AccountRealm extends AuthorizingRealm {
 
     /**
      * 让realm支持jwt的凭证校验
-     * @param token
-     * @return
      */
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -33,8 +33,6 @@ public class AccountRealm extends AuthorizingRealm {
 
     /**
      * 权限校验
-     * @param principalCollection
-     * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -43,9 +41,6 @@ public class AccountRealm extends AuthorizingRealm {
 
     /**
      * 登录认证校验
-     * @param token
-     * @return
-     * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {

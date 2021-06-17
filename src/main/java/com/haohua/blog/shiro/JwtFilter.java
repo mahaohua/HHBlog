@@ -26,6 +26,9 @@ public class JwtFilter extends AuthenticatingFilter {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * 实现登录，生成我们自定义支持的JwtToken
+     */
     @Override
     protected AuthenticationToken createToken(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -36,6 +39,10 @@ public class JwtFilter extends AuthenticatingFilter {
         return new JwtToken(jwt);
     }
 
+    /**
+     * 拦截校验，当头部没有Authorization时候，直接通过，不需要自动登录；
+     *                当带有的时候，首先校验jwt的有效性，没问题就执行executeLogin方法实现自动登录
+     */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
@@ -54,6 +61,9 @@ public class JwtFilter extends AuthenticatingFilter {
         return  executeLogin(servletRequest, servletResponse);
     }
 
+    /**
+     * 登录异常时进入的方法，直接把异常信息封装后抛出
+     */
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
@@ -69,6 +79,9 @@ public class JwtFilter extends AuthenticatingFilter {
         return false;
     }
 
+    /**
+     * 前置拦截，提供跨域支持
+     */
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = WebUtils.toHttp(request);

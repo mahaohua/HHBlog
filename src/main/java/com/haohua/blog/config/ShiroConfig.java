@@ -13,6 +13,7 @@ import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import java.util.Map;
 /**
  * shiro启用注解拦截控制器
  */
+@Configuration
 public class ShiroConfig {
     @Autowired
     JwtFilter jwtFilter;

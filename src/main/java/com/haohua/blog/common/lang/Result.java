@@ -2,37 +2,41 @@ package com.haohua.blog.common.lang;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Result {
-    private String code;
+public class Result implements Serializable {
+
+    private int code;   // 200正常
     private String msg;
     private Object data;
-    private static Result success(Object data){
-        Result m = new Result();
-        m.setCode("0");
-        m.setData(data);
-        m.setMsg("操作成功");
-        return m;
+
+    public static Result succ(Object data){
+        return succ(200, "操作成功", data);
     }
-    public static Result success(String msg, Object data){
-        Result m = new Result();
-        m.setCode("0");
-        m.setData(data);
-        m.setMsg(msg);
-        return m;
+
+    public static Result succ(int code, String msg, Object data){
+        Result r = new Result();
+        r.setCode(code);
+        r.setMsg(msg);
+        r.setData(data);
+        return r;
     }
+
     public static Result fail(String msg){
-        Result m = new Result();
-        m.setCode("-1");
-        m.setData(null);
-        m.setMsg(msg);
-        return m;
+        return fail(400, msg, null);
     }
+
     public static Result fail(String msg, Object data){
-        Result m = new Result();
-        m.setCode("-1");
-        m.setData(data);
-        m.setMsg(msg);
-        return m;
+        return fail(400, msg, null);
+    }
+
+    public static Result fail(int code, String msg, Object data){
+        Result r = new Result();
+        r.setCode(code);
+        r.setMsg(msg);
+        r.setData(data);
+        return r;
     }
 }
+
