@@ -1,5 +1,5 @@
 # HHBlog
-This is a Blog project
+This is a Blog project.
 - 技术栈：
 - SpringBoot
 - mybatis plus
